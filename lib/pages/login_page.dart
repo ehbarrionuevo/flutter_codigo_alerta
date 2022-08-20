@@ -24,15 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }).catchError((error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              Text(error.toString()),
-            ],
-          ),
-        ),
-      );
+
     });
   }
 
