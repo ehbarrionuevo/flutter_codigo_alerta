@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/pages/home_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
@@ -11,17 +10,29 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController dniController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
 
-  _login(){
+  _login() {
     APIService apiService = APIService();
-    apiService.login().then((value){
-      if(value != null){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+    apiService.login().then((value) {
+      if (value != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Text(error.toString()),
+            ],
+          ),
+        ),
+      );
     });
   }
 
@@ -98,17 +109,14 @@ class _LoginPageState extends State<LoginPage> {
                         height: 52.0,
                         child: ElevatedButton(
                           onPressed: () {
-
                             _login();
-
                           },
                           style: ElevatedButton.styleFrom(
-                            elevation: 8,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
-                            ),
-                            primary: Color(0xff2F6FE7)
-                          ),
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                              primary: Color(0xff2F6FE7)),
                           child: Text(
                             "Iniciar Sesión",
                             style: TextStyle(
