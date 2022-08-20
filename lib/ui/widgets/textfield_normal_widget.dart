@@ -40,6 +40,14 @@ class TextFieldNormalWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(14.0),
             borderSide: BorderSide.none,
           ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14.0),
+            borderSide: BorderSide.none,
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14.0),
+            borderSide: BorderSide.none,
+          ),
         ),
         validator: (String? value){
           if(value != null && value.isEmpty){
