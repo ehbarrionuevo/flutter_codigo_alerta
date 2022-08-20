@@ -1,15 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 
-class TextFieldNormalWidget extends StatelessWidget {
-  String hintText;
-  TextEditingController controller;
+class TextFieldPasswordWidget extends StatefulWidget {
+  const TextFieldPasswordWidget({Key? key}) : super(key: key);
 
-  TextFieldNormalWidget({
-    required this.hintText,
-    required this.controller,
-  });
+  @override
+  State<TextFieldPasswordWidget> createState() => _TextFieldPasswordWidgetState();
+}
 
+class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class TextFieldNormalWidget extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: "DNI",
+          hintText: "Contraseña",
           hintStyle: TextStyle(
             fontSize: 14.0,
             color: kFontPrimaryColor.withOpacity(0.50),

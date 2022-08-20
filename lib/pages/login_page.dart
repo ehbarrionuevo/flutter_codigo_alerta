@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/textfield_password_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+
+  final TextEditingController dniController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,13 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     divider20,
-                    TextFieldNormalWidget(),
+                    TextFieldNormalWidget(
+                      hintText: "DNI",
+                      controller: dniController,
+                    ),
                     divider20,
-                    TextFieldNormalWidget(),
+                    TextFieldPasswordWidget(),
+
                   ],
                 ),
               ),
