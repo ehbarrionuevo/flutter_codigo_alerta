@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 
 class TextFieldPasswordWidget extends StatefulWidget {
-  const TextFieldPasswordWidget({Key? key}) : super(key: key);
+
+  TextEditingController controller;
+  TextFieldPasswordWidget({required this.controller});
 
   @override
   State<TextFieldPasswordWidget> createState() =>
@@ -25,6 +27,7 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
         ],
       ),
       child: TextField(
+        controller: widget.controller,
         obscureText: isInvisible,
         decoration: InputDecoration(
           hintText: "Contraseña",

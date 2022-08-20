@@ -7,6 +7,7 @@ import 'package:flutter_codigo_alerta/ui/widgets/textfield_password_widget.dart'
 class LoginPage extends StatelessWidget {
 
   final TextEditingController dniController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +36,48 @@ class LoginPage extends StatelessWidget {
                     topRight: Radius.circular(40.0),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Alerta Municipio",
-                      style: TextStyle(
-                        color: kFontPrimaryColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.normal,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Alerta Municipio",
+                        style: TextStyle(
+                          color: kFontPrimaryColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                    divider6,
-                    Text(
-                      "Iniciar Sesión",
-                      style: TextStyle(
-                        color: kFontPrimaryColor,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w600,
+                      divider6,
+                      Text(
+                        "Iniciar Sesión",
+                        style: TextStyle(
+                          color: kFontPrimaryColor,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    divider6,
-                    Text(
-                      "Ingresa tus credenciales en los siguientes campos",
-                      style: TextStyle(
-                        color: kFontPrimaryColor.withOpacity(0.85),
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.normal,
+                      divider6,
+                      Text(
+                        "Ingresa tus credenciales en los siguientes campos",
+                        style: TextStyle(
+                          color: kFontPrimaryColor.withOpacity(0.85),
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                    divider20,
-                    TextFieldNormalWidget(
-                      hintText: "DNI",
-                      controller: dniController,
-                    ),
-                    divider20,
-                    TextFieldPasswordWidget(),
+                      divider20,
+                      TextFieldNormalWidget(
+                        hintText: "DNI",
+                        controller: dniController,
+                      ),
+                      divider20,
+                      TextFieldPasswordWidget(
+                        controller: passwordController,
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
