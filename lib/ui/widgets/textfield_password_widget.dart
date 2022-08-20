@@ -26,7 +26,7 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
         obscureText: isInvisible,
         decoration: InputDecoration(
@@ -58,6 +58,12 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
             borderSide: BorderSide.none,
           ),
         ),
+        validator: (String? value){
+          if(value != null && value.isEmpty){
+            return "Campo obligatorio";
+          }
+          return null;
+        },
       ),
     );
   }

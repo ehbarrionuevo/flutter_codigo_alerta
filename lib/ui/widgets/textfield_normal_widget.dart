@@ -22,7 +22,7 @@ class TextFieldNormalWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
@@ -41,6 +41,12 @@ class TextFieldNormalWidget extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
         ),
+        validator: (String? value){
+          if(value != null && value.isEmpty){
+            return "Campo obligatorio";
+          }
+          return null;
+        },
       ),
     );
   }

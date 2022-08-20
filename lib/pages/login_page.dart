@@ -12,23 +12,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController dniController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   _login() {
-    APIService apiService = APIService();
+    if(_formKey.currentState!.validate()){
+      APIService apiService = APIService();
 
-    String username = dniController.text;
-    String pwd = passwordController.text;
-    apiService.login(username, pwd).then((value) {
-      if (value != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      }
-    }).catchError((error) {
-      showSnackBarError(context, error.toString());
-    });
+      String username = dniController.text;
+      String pwd = passwordController.text;
+      apiService.login(username, pwd).then((value) {
+        if (value != null) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        }else{
+          showSnackBarError(context, "Credenciales incorrectas");
+        }
+      }).catchError((error) {
+        showSnackBarError(context, error.toString());
+      });
+    }
   }
 
   @override
@@ -61,66 +65,69 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Alerta Municipio",
-                        style: TextStyle(
-                          color: kFontPrimaryColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.normal,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Alerta Municipio",
+                          style: TextStyle(
+                            color: kFontPrimaryColor,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                      ),
-                      divider6,
-                      Text(
-                        "Iniciar Sesión",
-                        style: TextStyle(
-                          color: kFontPrimaryColor,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w600,
+                        divider6,
+                        Text(
+                          "Iniciar Sesión",
+                          style: TextStyle(
+                            color: kFontPrimaryColor,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      divider6,
-                      Text(
-                        "Ingresa tus credenciales en los siguientes campos",
-                        style: TextStyle(
-                          color: kFontPrimaryColor.withOpacity(0.85),
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.normal,
+                        divider6,
+                        Text(
+                          "Ingresa tus credenciales en los siguientes campos",
+                          style: TextStyle(
+                            color: kFontPrimaryColor.withOpacity(0.85),
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                      ),
-                      divider20,
-                      TextFieldNormalWidget(
-                        hintText: "DNI",
-                        controller: dniController,
-                      ),
-                      divider20,
-                      TextFieldPasswordWidget(
-                        controller: passwordController,
-                      ),
-                      divider30,
-                      SizedBox(
-                        width: double.infinity,
-                        height: 52.0,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _login();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              elevation: 8,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14.0),
+                        divider20,
+                        TextFieldNormalWidget(
+                          hintText: "DNI",
+                          controller: dniController,
+                        ),
+                        divider20,
+                        TextFieldPasswordWidget(
+                          controller: passwordController,
+                        ),
+                        divider30,
+                        SizedBox(
+                          width: double.infinity,
+                          height: 52.0,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _login();
+                            },
+                            style: ElevatedButton.styleFrom(
+                                elevation: 8,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14.0),
+                                ),
+                                primary: Color(0xff2F6FE7)),
+                            child: Text(
+                              "Iniciar Sesión",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                              primary: Color(0xff2F6FE7)),
-                          child: Text(
-                            "Iniciar Sesión",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
