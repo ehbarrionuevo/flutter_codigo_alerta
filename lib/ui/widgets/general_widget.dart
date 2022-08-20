@@ -38,7 +38,11 @@ showSnackBarError(BuildContext context, String text) {
             color: Colors.white,
           ),
           divider10Width,
-          Text(text),
+          Expanded(
+            child: Text(
+              text,
+            ),
+          ),
         ],
       ),
     ),

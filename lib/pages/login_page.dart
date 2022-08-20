@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }).catchError((error) {
-
+      showSnackBarError(context, error.toString());
     });
   }
 

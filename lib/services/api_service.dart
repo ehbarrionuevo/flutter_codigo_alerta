@@ -32,11 +32,11 @@ class APIService {
       return null;
 
     } on TimeoutException catch(e){
-      return Future.error("Error en el servidor");
+      return Future.error("Hubo un inconveniente con servicio, inténtalo nuevamente.");
     } on SocketException catch(e){
-      return Future.error("Error con el internet");
+      return Future.error("Hubo un inconveniente con el interner, inténtalo nuevamente.");
     } on Error catch (e){
-      return Future.error("Error del programador");
+      return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
     }
   }
 }
