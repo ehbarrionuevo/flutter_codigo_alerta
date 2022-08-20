@@ -1,13 +1,29 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/pages/home_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_password_widget.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController dniController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
+  _login(){
+    APIService apiService = APIService();
+    apiService.login().then((value){
+      if(value != null){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +99,7 @@ class LoginPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
 
-                            APIService apiService = APIService();
-                            apiService.login();
+                            _login();
 
                           },
                           style: ElevatedButton.styleFrom(

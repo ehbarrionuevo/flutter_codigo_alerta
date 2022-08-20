@@ -6,10 +6,9 @@ import 'package:flutter_codigo_alerta/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class APIService {
+
   Future<UserModel?> login() async {
-
     try{
-
       String path = "$pathProduction/login/";
       Uri url = Uri.parse(path);
       http.Response response = await http.post(
@@ -39,6 +38,5 @@ class APIService {
     } on Error catch (e){
       print("C");
     }
-
   }
 }
