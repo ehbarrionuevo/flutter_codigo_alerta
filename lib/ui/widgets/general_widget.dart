@@ -23,6 +23,17 @@ SizedBox divider10Width = const SizedBox(
   width: 10,
 );
 
+Container circleWidget(double radius) => Container(
+  height: radius * 2,
+  width: radius * 2,
+  decoration: BoxDecoration(
+    color: Colors.white.withOpacity(0.06),
+    shape: BoxShape.circle,
+  ),
+);
+
+
+
 showSnackBarError(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
