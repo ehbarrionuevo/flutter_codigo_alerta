@@ -9,16 +9,42 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: Stack(
         children: [
           //Fondo
           BackgroundWidget(),
           //Contenido principal
-
-          Text("Hola"),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    divider30,
+                    const Text(
+                      "Alerta municipal",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0
+                      ),
+                    ),
+                    divider12,
+                    const Text(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14.0
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
