@@ -18,6 +18,8 @@ class APIService {
         },
       ),
     );
-    print(response.statusCode);
+    if(response.statusCode == 200){
+       Map<String, dynamic> myMap = json.decode(response.body);
+    }
   }
 }
