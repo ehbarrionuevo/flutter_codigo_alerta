@@ -1,10 +1,10 @@
 import 'dart:convert';
-
+import 'package:flutter_codigo_alerta/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class APIService {
   login() async {
-    String path = "http://alertahunter.herokuapp.com/API/login/";
+    String path = "$pathProduction/login/";
     Uri url = Uri.parse(path);
     http.Response response = await http.post(
       url,
