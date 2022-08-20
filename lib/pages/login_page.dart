@@ -18,7 +18,10 @@ class _LoginPageState extends State<LoginPage> {
 
   _login() {
     APIService apiService = APIService();
-    apiService.login().then((value) {
+
+    String username = dniController.text;
+    String pwd = passwordController.text;
+    apiService.login(username, pwd).then((value) {
       if (value != null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));

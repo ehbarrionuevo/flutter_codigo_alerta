@@ -33,7 +33,7 @@ showSnackBarError(BuildContext context, String text) {
       ),
       content: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             color: Colors.white,
           ),

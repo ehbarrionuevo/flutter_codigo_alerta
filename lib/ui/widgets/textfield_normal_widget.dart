@@ -23,8 +23,9 @@ class TextFieldNormalWidget extends StatelessWidget {
         ],
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
-          hintText: "DNI",
+          hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 14.0,
             color: kFontPrimaryColor.withOpacity(0.50),

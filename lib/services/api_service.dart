@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class APIService {
 
-  Future<UserModel?> login() async {
+  Future<UserModel?> login(String username, String pwd) async {
     try{
       String path = "$pathProduction/login/";
       Uri url = Uri.parse(path);
@@ -18,8 +18,8 @@ class APIService {
         },
         body: json.encode(
           {
-            "username": "47707721",
-            "password": "3volution",
+            "username": username,
+            "password": pwd,
           },
         ),
       );
