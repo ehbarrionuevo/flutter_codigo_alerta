@@ -5,7 +5,6 @@ import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_password_widget.dart';
 
 class LoginPage extends StatelessWidget {
-
   final TextEditingController dniController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -15,7 +14,8 @@ class LoginPage extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage("https://images.pexels.com/photos/889545/pexels-photo-889545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+          image: NetworkImage(
+              "https://images.pexels.com/photos/889545/pexels-photo-889545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
         ),
       ),
       child: Scaffold(
@@ -75,7 +75,27 @@ class LoginPage extends StatelessWidget {
                       TextFieldPasswordWidget(
                         controller: passwordController,
                       ),
-
+                      divider30,
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52.0,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.0),
+                            ),
+                            primary: Color(0xff2F6FE7)
+                          ),
+                          child: Text(
+                            "Iniciar Sesión",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
