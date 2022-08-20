@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
@@ -80,7 +81,12 @@ class LoginPage extends StatelessWidget {
                         width: double.infinity,
                         height: 52.0,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+                            APIService apiService = APIService();
+                            apiService.login();
+
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 8,
                             shape: RoundedRectangleBorder(
