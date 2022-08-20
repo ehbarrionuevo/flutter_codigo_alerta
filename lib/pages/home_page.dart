@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           //Fondo
-          BackgroundWidget(),
+          const BackgroundWidget(),
           //Contenido principal
           SafeArea(
             child: SingleChildScrollView(
@@ -39,6 +39,58 @@ class HomePage extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           fontSize: 14.0
                       ),
+                    ),
+                    divider40,
+                    GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                      children: [
+
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 10.0
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 10.0
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 10.0
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
