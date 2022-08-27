@@ -3,6 +3,7 @@ import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewsFormPage extends StatefulWidget {
   const NewsFormPage({Key? key}) : super(key: key);
@@ -12,7 +13,20 @@ class NewsFormPage extends StatefulWidget {
 }
 
 class _NewsFormPageState extends State<NewsFormPage> {
+
   final TextEditingController titleController = TextEditingController();
+
+
+  getImageGallery(){
+    ImagePicker _imagePicker = ImagePicker();
+    _imagePicker.pickImage(source: ImageSource.gallery);
+  }
+
+  getImageCamera(){
+    ImagePicker _imagePicker = ImagePicker();
+    _imagePicker.pickImage(source: ImageSource.camera);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +62,9 @@ class _NewsFormPageState extends State<NewsFormPage> {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        getImageGallery();
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.indigo,
                         shape: RoundedRectangleBorder(
@@ -64,7 +80,9 @@ class _NewsFormPageState extends State<NewsFormPage> {
                   divider10Width,
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        getImageCamera();
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xffF6AA26),
                         shape: RoundedRectangleBorder(
@@ -80,11 +98,14 @@ class _NewsFormPageState extends State<NewsFormPage> {
                 ],
               ),
               divider20,
-              Image.asset(
-                'assets/images/error.jpg',
-                width: double.infinity,
-                height: 240.0,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14.0),
+                child: Image(
+                  image: AssetImage("assets/images/error.jpg"),
+                  width: double.infinity,
+                  height: 240.0,
+                  fit: BoxFit.cover,
+                ),
               ),
               divider30,
               ButtonNormalWidget(
