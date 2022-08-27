@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/models/news_model.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class NewsFormPage extends StatefulWidget {
   const NewsFormPage({Key? key}) : super(key: key);
@@ -16,28 +19,43 @@ class NewsFormPage extends StatefulWidget {
 }
 
 class _NewsFormPageState extends State<NewsFormPage> {
-
   XFile? imageSource;
   final TextEditingController titleController = TextEditingController();
-
+  final TextEditingController linkController = TextEditingController();
 
   getImageGallery() async {
     ImagePicker _imagePicker = ImagePicker();
     imageSource = await _imagePicker.pickImage(source: ImageSource.gallery);
-    setState((){});
+    setState(() {});
   }
 
   getImageCamera() async {
     ImagePicker _imagePicker = ImagePicker();
     imageSource = await _imagePicker.pickImage(source: ImageSource.camera);
-    setState((){});
+    setState(() {});
   }
 
-  saveNews(){
+  saveNews() async {
     APIService apiService = APIService();
-    apiService.registerNews(File(imageSource!.path));
-  }
 
+    NewsModel newsModel = NewsModel(
+      id: 0,
+      link: linkController.text,
+      titulo: titleController.text,
+      fecha: DateTime.now(),
+      imagen: "",
+    );
+
+    print(DateTime.now());
+    final DateFormat formatter = DateFormat('dd-MMMM-yyyy');
+    final String formatted = formatter.format(DateTime.now());
+    print(formatted);
+
+    // File file = File(imageSource!.path);
+    // File compressedFile =
+    //     await FlutterNativeImage.compressImage(file.path, quality: 80);
+    // apiService.registerNews(File(compressedFile.path));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +130,9 @@ class _NewsFormPageState extends State<NewsFormPage> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(14.0),
                 child: Image(
-                  image: imageSource != null ? FileImage(File(imageSource!.path)) : AssetImage("assets/images/error.jpg") as ImageProvider,
+                  image: imageSource != null
+                      ? FileImage(File(imageSource!.path))
+                      : AssetImage("assets/images/error.jpg") as ImageProvider,
                   width: double.infinity,
                   height: 280.0,
                   fit: BoxFit.cover,
