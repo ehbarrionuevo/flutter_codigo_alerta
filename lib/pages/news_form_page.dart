@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
@@ -14,17 +16,20 @@ class NewsFormPage extends StatefulWidget {
 
 class _NewsFormPageState extends State<NewsFormPage> {
 
+  XFile? imageSource;
   final TextEditingController titleController = TextEditingController();
 
 
-  getImageGallery(){
+  getImageGallery() async {
     ImagePicker _imagePicker = ImagePicker();
-    _imagePicker.pickImage(source: ImageSource.gallery);
+    imageSource = await _imagePicker.pickImage(source: ImageSource.gallery);
+    setState((){});
   }
 
-  getImageCamera(){
+  getImageCamera() async {
     ImagePicker _imagePicker = ImagePicker();
-    _imagePicker.pickImage(source: ImageSource.camera);
+    imageSource = await _imagePicker.pickImage(source: ImageSource.camera);
+    setState((){});
   }
 
 
@@ -101,7 +106,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(14.0),
                 child: Image(
-                  image: AssetImage("assets/images/error.jpg"),
+                  image: imageSource != null ? FileImage(File(imageSource!.path)) : AssetImage("assets/images/error.jpg") as ImageProvider,
                   width: double.infinity,
                   height: 240.0,
                   fit: BoxFit.cover,
