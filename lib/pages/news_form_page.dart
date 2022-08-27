@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
@@ -30,6 +31,11 @@ class _NewsFormPageState extends State<NewsFormPage> {
     ImagePicker _imagePicker = ImagePicker();
     imageSource = await _imagePicker.pickImage(source: ImageSource.camera);
     setState((){});
+  }
+
+  saveNews(){
+    APIService apiService = APIService();
+    apiService.registerNews();
   }
 
 
@@ -115,7 +121,9 @@ class _NewsFormPageState extends State<NewsFormPage> {
               divider30,
               ButtonNormalWidget(
                 text: "Guardar",
-                onPressed: () {},
+                onPressed: () {
+                  saveNews();
+                },
               ),
             ],
           ),

@@ -115,6 +115,13 @@ class APIService {
     }
   }
 
+  registerNews(){
+    String path = "$pathProduction/noticias/";
+    Uri url = Uri.parse(path);
+    final request = http.MultipartRequest("POST", url);
+    print(request);
+  }
+
 
 
 }
