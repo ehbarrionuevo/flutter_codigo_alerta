@@ -35,7 +35,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
 
   saveNews(){
     APIService apiService = APIService();
-    apiService.registerNews();
+    apiService.registerNews(File(imageSource!.path));
   }
 
 

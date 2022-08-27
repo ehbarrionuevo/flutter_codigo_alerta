@@ -8,6 +8,8 @@ import 'package:flutter_codigo_alerta/models/user_model.dart';
 import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
 import 'package:flutter_codigo_alerta/utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:mime_type/mime_type.dart';
+import 'package:http_parser/http_parser.dart';
 
 class APIService {
   Future<UserModel?> login(String username, String pwd) async {
@@ -115,11 +117,24 @@ class APIService {
     }
   }
 
-  registerNews(){
+  registerNews(File image){
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
-    print(request);
+
+    List<String> mimeType = mime(image.path)!.split("/");
+
+    http.MultipartFile.fromPath(
+      "imagen",
+      image.path,
+      contentType: MediaType(mimeType[0], mimeType[1]),
+    );
+
+
+
+    request.fields["titulo"] = "Noticia: Elvis enviado desde Flutter";
+    request.fields["link"] = "https://www.youtube.com/watch?v=acgLDCFHswE&ab_channel=WebDevSimplified";
+    request.fields["fecha"] = "2022-01-02";
   }
 
 
