@@ -52,7 +52,7 @@ class NewsPage extends StatelessWidget {
                                 errorWidget: (context, url, error) =>
                                     Image.asset(
                                   'assets/images/error.jpg',
-                                      fit: BoxFit.cover,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -61,10 +61,10 @@ class NewsPage extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0, vertical: 14.0),
-                                  margin:
-                                      EdgeInsets.symmetric(horizontal: 26.0),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 26.0),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(14.0),
@@ -77,13 +77,15 @@ class NewsPage extends StatelessWidget {
                                     ],
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
                                         "12/12/2022",
                                         style: TextStyle(
-                                          color: kFontPrimaryColor.withOpacity(0.75),
+                                          color: kFontPrimaryColor
+                                              .withOpacity(0.75),
                                           fontSize: 12.0,
                                         ),
                                       ),
@@ -91,12 +93,28 @@ class NewsPage extends StatelessWidget {
                                       Text(
                                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
                                         style: TextStyle(
-                                          color: kFontPrimaryColor.withOpacity(0.85),
+                                          color: kFontPrimaryColor
+                                              .withOpacity(0.85),
                                           fontSize: 14.0,
                                         ),
                                       ),
                                     ],
                                   ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: Container(
+                                padding: EdgeInsets.all(6.0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white.withOpacity(0.50),
+                                ),
+                                child: Icon(
+                                  Icons.link,
+                                  color: kFontPrimaryColor.withOpacity(0.75),
                                 ),
                               ),
                             ),
