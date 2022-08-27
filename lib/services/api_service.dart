@@ -39,4 +39,14 @@ class APIService {
       return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
     }
   }
+
+  getCitizens() async{
+    String path = "$pathProduction/ciudadanos/";
+    Uri url = Uri.parse(path);
+    http.Response response = await http.get(url);
+    print(response.statusCode);
+    print(response.body);
+  }
+
+
 }
