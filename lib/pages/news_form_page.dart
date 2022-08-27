@@ -79,6 +79,14 @@ class _NewsFormPageState extends State<NewsFormPage> {
                   ),
                 ],
               ),
+              divider20,
+              Image.asset(
+                'assets/images/error.jpg',
+                width: double.infinity,
+                height: 240.0,
+                fit: BoxFit.cover,
+              ),
+              divider30,
               ButtonNormalWidget(
                 text: "Guardar",
                 onPressed: () {},
