@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/pages/home_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/textfield_password_widget.dart';
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   _login() {
-    if(_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       APIService apiService = APIService();
 
       String username = dniController.text;
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         if (value != null) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomePage()));
-        }else{
+        } else {
           showSnackBarError(context, "Credenciales incorrectas");
         }
       }).catchError((error) {
@@ -105,26 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                           controller: passwordController,
                         ),
                         divider30,
-                        SizedBox(
-                          width: double.infinity,
-                          height: 52.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _login();
-                            },
-                            style: ElevatedButton.styleFrom(
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(14.0),
-                                ),
-                                primary: Color(0xff2F6FE7)),
-                            child: Text(
-                              "Iniciar Sesión",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                        ButtonNormalWidget(
+                          text: "Iniciar Sesión",
+                          onPressed: () {
+                            _login();
+                          },
                         ),
                       ],
                     ),
