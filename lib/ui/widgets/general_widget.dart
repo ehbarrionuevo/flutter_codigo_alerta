@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 
 SizedBox divider3 = const SizedBox(
   height: 3,
@@ -24,14 +25,24 @@ SizedBox divider10Width = const SizedBox(
 );
 
 Container circleWidget(double radius) => Container(
-  height: radius * 2,
-  width: radius * 2,
-  decoration: BoxDecoration(
-    color: Colors.white.withOpacity(0.06),
-    shape: BoxShape.circle,
-  ),
-);
+      height: radius * 2,
+      width: radius * 2,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.06),
+        shape: BoxShape.circle,
+      ),
+    );
 
+Center loadingWidget() => Center(
+      child: SizedBox(
+        height: 20,
+        width: 20,
+        child: CircularProgressIndicator(
+          color: kFontPrimaryColor,
+          strokeWidth: 1.7,
+        ),
+      ),
+    );
 
 
 showSnackBarError(BuildContext context, String text) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/citizen_model.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 
 class CitizenPage extends StatefulWidget {
   const CitizenPage({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class _CitizenPageState extends State<CitizenPage> {
               },
             );
           }
-          return Text("Hola");
+          return loadingWidget();
         },
       ),
     );
