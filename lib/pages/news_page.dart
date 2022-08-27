@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/news_model.dart';
+import 'package:flutter_codigo_alerta/pages/news_form_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
@@ -19,6 +20,13 @@ class NewsPage extends StatelessWidget {
         child: MyAppBar(
           title: "Noticias",
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kFontPrimaryColor,
+        child: Icon(Icons.add),
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewsFormPage()));
+        },
       ),
       body: FutureBuilder(
         future: apiService.getNews(),

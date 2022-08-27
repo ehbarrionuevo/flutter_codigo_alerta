@@ -14,8 +14,12 @@ class ItemNewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: 40.0, horizontal: 16.0),
+      margin: const EdgeInsets.only(
+        bottom: 40,
+        top: 20,
+        right: 14,
+        left: 14,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14.0),
@@ -30,8 +34,7 @@ class ItemNewsWidget extends StatelessWidget {
             child: CachedNetworkImage(
               width: double.infinity,
               height: 240.0,
-              imageUrl:
-              "http://alertahunter.herokuapp.com/media/Noticias/image_picker1822915258180595565_compressed7606707498878403981.jpg",
+              imageUrl: newsModel.imagen,
               fit: BoxFit.cover,
               placeholder: (context, url) => loadingWidget(),
               errorWidget: (context, url, error) =>
