@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_codigo_alerta/models/citizen_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
+import 'package:flutter_codigo_alerta/models/news_model.dart';
 import 'package:flutter_codigo_alerta/models/user_model.dart';
 import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
 import 'package:flutter_codigo_alerta/utils/constants.dart';
@@ -91,15 +92,15 @@ class APIService {
 
 
 
-  Future<List<IncidentTypeModel>> getNews() async {
+  Future<List<NewsModel>> getNews() async {
     try {
       String path = "$pathProduction/noticias/";
       Uri url = Uri.parse(path);
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         List list = json.decode(response.body);
-        List<IncidentTypeModel> incidentTypeList = list.map((e) => IncidentTypeModel.fromJson(e)).toList();
-        return incidentTypeList;
+        List<NewsModel> newsList = list.map((e) => NewsModel.fromJson(e)).toList();
+        return newsList;
       }
       return [];
     } on TimeoutException catch (error) {
