@@ -29,24 +29,55 @@ class NewsPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 16.0),
+                            vertical: 40.0, horizontal: 16.0),
                         decoration: BoxDecoration(
                           color: Colors.red,
+                          borderRadius: BorderRadius.circular(14.0),
                         ),
                         width: double.infinity,
-                        height: 260.0,
-                        child: CachedNetworkImage(
-                          imageUrl: "https://images.pexels.com/photos/12791156/pexels-photo-12791156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                          placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                        height: 240.0,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(14.0),
+                              child: CachedNetworkImage(
+                                width: double.infinity,
+                                height: 240.0,
+                                imageUrl:
+                                    "https://images.pexels.com/photos/12791156/pexels-photo-12791156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => loadingWidget(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ),
+                            Positioned.fill(
+                              bottom: -40,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                                  margin: EdgeInsets.symmetric(horizontal: 26.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black87.withOpacity(0.05),
+                                        offset: const Offset(0, 5),
+                                        blurRadius: 12.0
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        // child: Image.network(
-                        //   "http://alertahunter.herokuapp.com/media/Noticias/image_picker1822915258180595565_compressed7606707498878403981.jpg",
-                        //   errorBuilder: (context, error, stackTrace){
-                        //     return Image.asset('assets/images/box.png');
-                        //   },
-                        // ),
-
                       );
                     },
                   )
