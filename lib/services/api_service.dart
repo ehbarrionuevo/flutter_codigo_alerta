@@ -75,7 +75,6 @@ class APIService {
       if (response.statusCode == 200) {
         List list = json.decode(response.body);
         List<IncidentTypeModel> incidentTypeList = list.map((e) => IncidentTypeModel.fromJson(e)).toList();
-        print(incidentTypeList);
         return incidentTypeList;
       }
       return [];
