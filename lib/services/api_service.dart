@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_codigo_alerta/models/citizen_model.dart';
+import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
 import 'package:flutter_codigo_alerta/models/user_model.dart';
 import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
 import 'package:flutter_codigo_alerta/utils/constants.dart';
@@ -66,15 +67,16 @@ class APIService {
     }
   }
 
-  Future<List<CitizenModel>> getIncidentTypes() async {
+  Future<List<IncidentTypeModel>> getIncidentTypes() async {
     try {
       String path = "$pathProduction/incidentes/tipos/";
       Uri url = Uri.parse(path);
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         List list = json.decode(response.body);
-
-        return [];
+        List<IncidentTypeModel> incidentTypeList = list.map((e) => IncidentTypeModel.fromJson(e)).toList();
+        print(incidentTypeList);
+        return incidentTypeList;
       }
       return [];
     } on TimeoutException catch (error) {
