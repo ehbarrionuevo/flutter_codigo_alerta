@@ -117,24 +117,30 @@ class APIService {
     }
   }
 
-  registerNews(File image){
+  registerNews(File image) async{
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
 
     List<String> mimeType = mime(image.path)!.split("/");
 
-    http.MultipartFile.fromPath(
+    http.MultipartFile file = await http.MultipartFile.fromPath(
       "imagen",
       image.path,
       contentType: MediaType(mimeType[0], mimeType[1]),
     );
 
-
-
+    request.files.add(file);
     request.fields["titulo"] = "Noticia: Elvis enviado desde Flutter";
     request.fields["link"] = "https://www.youtube.com/watch?v=acgLDCFHswE&ab_channel=WebDevSimplified";
     request.fields["fecha"] = "2022-01-02";
+
+    http.StreamedResponse streamedResponse = await request.send();
+
+    http.Response response = await http.Response.fromStream(streamedResponse);
+
+    print(response.statusCode);
+
   }
 
 
