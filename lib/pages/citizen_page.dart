@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/models/citizen_model.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 
@@ -9,12 +10,7 @@ class CitizenPage extends StatefulWidget {
   State<CitizenPage> createState() => _CitizenPageState();
 }
 
-
-
-
-
 class _CitizenPageState extends State<CitizenPage> {
-
   APIService apiService = APIService();
 
   @override
@@ -41,12 +37,25 @@ class _CitizenPageState extends State<CitizenPage> {
       ),
       body: FutureBuilder(
         future: apiService.getCitizens(),
-        builder: (BuildContext context, AsyncSnapshot snap){
-          if(snap.hasData){
+        builder: (BuildContext context, AsyncSnapshot snap) {
+          if (snap.hasData) {
+            List<CitizenModel> citizens = snap.data;
             return ListView.builder(
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index){
-                return Text("Hola 2");
+              itemCount: citizens.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: kFontPrimaryColor,
+                    child: Text(
+                      citizens[index].nombreCompleto[0],
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  title: Text(citizens[index].nombreCompleto),
+                  subtitle: Text(citizens[index].telefono),
+                );
               },
             );
           }
