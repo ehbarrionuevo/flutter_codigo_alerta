@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/news_model.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ItemNewsWidget extends StatelessWidget {
 
@@ -92,15 +93,21 @@ class ItemNewsWidget extends StatelessWidget {
           Positioned(
             top: 10,
             right: 10,
-            child: Container(
-              padding: EdgeInsets.all(6.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.50),
-              ),
-              child: Icon(
-                Icons.link,
-                color: kFontPrimaryColor.withOpacity(0.75),
+            child: InkWell(
+              onTap: (){
+                Uri url = Uri.parse(newsModel.link);
+                launchUrl(url);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(6.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white.withOpacity(0.50),
+                ),
+                child: Icon(
+                  Icons.link,
+                  color: kFontPrimaryColor.withOpacity(0.75),
+                ),
               ),
             ),
           ),
