@@ -98,7 +98,8 @@ class APIService {
       Uri url = Uri.parse(path);
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
-        List list = json.decode(response.body);
+        String responseDecode =  utf8.decode(response.bodyBytes);
+        List list = json.decode(responseDecode);
         List<NewsModel> newsList = list.map((e) => NewsModel.fromJson(e)).toList();
         return newsList;
       }

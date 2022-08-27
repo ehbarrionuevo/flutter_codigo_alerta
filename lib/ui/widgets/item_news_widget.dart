@@ -41,10 +41,11 @@ class ItemNewsWidget extends StatelessWidget {
             ),
           ),
           Positioned.fill(
-            bottom: -40,
+            bottom: -32,
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
+                width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 14.0),
                 margin: const EdgeInsets.symmetric(
@@ -76,6 +77,7 @@ class ItemNewsWidget extends StatelessWidget {
                     divider3,
                     Text(
                       newsModel.titulo,
+                      maxLines: 3,
                       style: TextStyle(
                         color: kFontPrimaryColor
                             .withOpacity(0.85),
