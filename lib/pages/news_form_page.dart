@@ -108,7 +108,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                 child: Image(
                   image: imageSource != null ? FileImage(File(imageSource!.path)) : AssetImage("assets/images/error.jpg") as ImageProvider,
                   width: double.infinity,
-                  height: 240.0,
+                  height: 280.0,
                   fit: BoxFit.cover,
                 ),
               ),
