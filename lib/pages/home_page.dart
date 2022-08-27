@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/background_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
@@ -48,13 +49,10 @@ class HomePage extends StatelessWidget {
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
                       children: [
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
-                        ItemMenuWidget(),
+                        ItemMenuWidget(
+                          text: "Ciudadanos",
+                          toPage: CitizenPage(),
+                        ),
 
                       ],
                     ),
