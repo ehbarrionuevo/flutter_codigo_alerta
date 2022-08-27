@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 
 class MyAppBar extends StatelessWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+
+  String title;
+
+  MyAppBar({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class MyAppBar extends StatelessWidget {
         color: kFontPrimaryColor,
       ),
       title: Text(
-        "Ciudadanos",
+        title,
         style: TextStyle(
           color: kFontPrimaryColor,
         ),

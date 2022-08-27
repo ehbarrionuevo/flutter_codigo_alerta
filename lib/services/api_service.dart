@@ -65,4 +65,28 @@ class APIService {
       return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
     }
   }
+
+  Future<List<CitizenModel>> getIncidentTypes() async {
+    try {
+      String path = "$pathProduction/incidentes/tipos/";
+      Uri url = Uri.parse(path);
+      http.Response response = await http.get(url);
+      if (response.statusCode == 200) {
+        List list = json.decode(response.body);
+
+        return [];
+      }
+      return [];
+    } on TimeoutException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con servicio, inténtalo nuevamente.");
+    } on SocketException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con el interner, inténtalo nuevamente.");
+    } on Error catch (error) {
+      return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
+    }
+  }
+
+
 }

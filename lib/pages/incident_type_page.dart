@@ -10,7 +10,9 @@ class IncidentTypePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
-        child: MyAppBar(),
+        child: MyAppBar(
+          title: "Tipo Incidentes",
+        ),
       ),
     );
   }

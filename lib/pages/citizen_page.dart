@@ -26,7 +26,9 @@ class _CitizenPageState extends State<CitizenPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
-        child: MyAppBar(),
+        child: MyAppBar(
+          title: "Ciudadanos",
+        ),
       ),
       body: FutureBuilder(
         future: apiService.getCitizens(),
