@@ -50,12 +50,13 @@ class _NewsFormPageState extends State<NewsFormPage> {
                     child: ElevatedButton.icon(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
+                        primary: Colors.indigo,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                       icon: Icon(Icons.image),
-                      label: Text(
+                      label: const Text(
                         "Galería",
                       ),
                     ),
@@ -65,12 +66,13 @@ class _NewsFormPageState extends State<NewsFormPage> {
                     child: ElevatedButton.icon(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
+                        primary: Color(0xffF6AA26),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                       icon: Icon(Icons.camera_alt),
-                      label: Text(
+                      label: const Text(
                         "Cámara",
                       ),
                     ),
