@@ -21,7 +21,6 @@ class _CitizenPageState extends State<CitizenPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    apiService.getCitizens();
   }
 
   @override
@@ -39,6 +38,20 @@ class _CitizenPageState extends State<CitizenPage> {
             color: kFontPrimaryColor,
           ),
         ),
+      ),
+      body: FutureBuilder(
+        future: apiService.getCitizens(),
+        builder: (BuildContext context, AsyncSnapshot snap){
+          if(snap.hasData){
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index){
+                return Text("Hola 2");
+              },
+            );
+          }
+          return Text("Hola");
+        },
       ),
     );
   }
