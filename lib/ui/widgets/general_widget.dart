@@ -44,6 +44,26 @@ Center loadingWidget() => Center(
       ),
     );
 
+Center emptyDataWidget() => Center(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(
+        'assets/images/box.png',
+        height: 70,
+        color: kFontPrimaryColor.withOpacity(0.85),
+      ),
+      divider6,
+      Text(
+        "Aún no hay registros.",
+        style: TextStyle(
+          color: kFontPrimaryColor.withOpacity(0.85),
+        ),
+      ),
+    ],
+  ),
+);
+
 
 showSnackBarError(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
