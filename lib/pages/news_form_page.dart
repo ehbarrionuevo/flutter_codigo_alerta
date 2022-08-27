@@ -27,6 +27,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
         child: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFieldNormalWidget(
                 hintText: "Título noticia",
@@ -38,6 +39,44 @@ class _NewsFormPageState extends State<NewsFormPage> {
                 controller: titleController,
               ),
               divider20,
+              Divider(),
+              Text(
+                "Seleccionar imagen",
+              ),
+              divider12,
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      icon: Icon(Icons.image),
+                      label: Text(
+                        "Galería",
+                      ),
+                    ),
+                  ),
+                  divider10Width,
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      icon: Icon(Icons.camera_alt),
+                      label: Text(
+                        "Cámara",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               ButtonNormalWidget(
                 text: "Guardar",
                 onPressed: () {},
