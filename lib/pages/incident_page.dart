@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/incident_model.dart';
+import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
@@ -15,13 +16,28 @@ class IncidentPage extends StatefulWidget {
 }
 
 class _IncidentPageState extends State<IncidentPage> {
+
   APIService apiService = APIService();
+  List<IncidentTypeModel> incidentTypes = [];
+
+  @override
+  initState(){
+    super.initState();
+    apiService.getIncidentTypes().then((value){
+      if(value.isNotEmpty){
+        incidentTypes = value;
+      }
+    });
+  }
 
   showRegisterIncident() {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return IncidentFormWidget();
+        return IncidentFormWidget(
+          incidentTypes: incidentTypes,
+        );
       },
     );
   }
