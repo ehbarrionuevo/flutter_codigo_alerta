@@ -123,7 +123,6 @@ class APIService {
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
-
     List<String> mimeType = mime(image.path)!.split("/");
 
     http.MultipartFile file = await http.MultipartFile.fromPath(
@@ -135,12 +134,12 @@ class APIService {
     request.files.add(file);
     request.fields["titulo"] = model.titulo;
     request.fields["link"] = model.link;
-    request.fields["fecha"] = formatter.format(model.fecha);
+    request.fields["fecha"] = model.fecha.toString().substring(0,10);
 
     http.StreamedResponse streamedResponse = await request.send();
 
     http.Response response = await http.Response.fromStream(streamedResponse);
-
+    print(response.statusCode);
     if(response.statusCode == 201){
       String responseDecode =  utf8.decode(response.bodyBytes);
       Map<String, dynamic> myMap = json.decode(responseDecode);

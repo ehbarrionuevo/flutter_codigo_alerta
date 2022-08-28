@@ -54,7 +54,16 @@ class _NewsFormPageState extends State<NewsFormPage> {
         File file = File(imageSource!.path);
         File compressedFile =
             await FlutterNativeImage.compressImage(file.path, quality: 80);
-        apiService.registerNews(newsModel, compressedFile);
+
+        apiService.registerNews(newsModel, compressedFile).then((value){
+            if(value != null){
+              showSnackBarSuccess(context, "Noticia registrada con éxito");
+              Navigator.pop(context);
+            }else{
+              showSnackBarError(context, "Hubo un error, inténtalo nuevamente.");
+            }
+        });
+
       } else {
         imageNoSelected = true;
         setState((){});

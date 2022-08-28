@@ -9,7 +9,12 @@ import 'package:flutter_codigo_alerta/ui/widgets/item_list_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/item_news_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
 
-class NewsPage extends StatelessWidget {
+class NewsPage extends StatefulWidget {
+  @override
+  State<NewsPage> createState() => _NewsPageState();
+}
+
+class _NewsPageState extends State<NewsPage> {
   APIService apiService = APIService();
 
   @override
@@ -25,7 +30,9 @@ class NewsPage extends StatelessWidget {
         backgroundColor: kFontPrimaryColor,
         child: Icon(Icons.add),
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewsFormPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewsFormPage())).then((value){
+            setState((){});
+          });
         },
       ),
       body: FutureBuilder(

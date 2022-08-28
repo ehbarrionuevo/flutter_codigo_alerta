@@ -90,3 +90,30 @@ showSnackBarError(BuildContext context, String text) {
     ),
   );
 }
+
+
+showSnackBarSuccess(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: const Color(0xff06d6a0),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14.0),
+      ),
+      content: Row(
+        children: [
+          const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+          divider10Width,
+          Expanded(
+            child: Text(
+              text,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
