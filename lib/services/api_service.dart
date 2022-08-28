@@ -175,5 +175,30 @@ class APIService {
   }
 
 
+  registerIncident() async{
+
+    String path = "$pathProduction/incidentes/crear/";
+    Uri url = Uri.parse(path);
+    http.Response response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Token 4ba755b2add893f43e5fa004f7fe3b67d4249f38",
+      },
+      body: json.encode(
+          {
+            "latitud": -16.361625,
+            "longitud": -71.568773,
+            "tipoIncidente": 2,
+            "estado": "Abierto"
+          }
+      ),
+    );
+
+    print(response.statusCode);
+
+  }
+
+
 
 }

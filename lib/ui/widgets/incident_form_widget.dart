@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
+import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 
@@ -12,7 +13,7 @@ class IncidentFormWidget extends StatefulWidget {
 }
 
 class _IncidentFormWidgetState extends State<IncidentFormWidget> {
-
+  APIService apiService = APIService();
   int indexSelected = 0;
 
   @override
@@ -83,7 +84,9 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
           divider20,
           ButtonNormalWidget(
             text: "Enviar alerta",
-            onPressed: () {},
+            onPressed: () {
+              apiService.registerIncident();
+            },
           ),
           divider12,
         ],
