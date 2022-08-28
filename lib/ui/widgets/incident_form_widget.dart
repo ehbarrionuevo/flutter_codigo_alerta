@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/models/incident_aux_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
+import 'package:geolocator/geolocator.dart';
 
 class IncidentFormWidget extends StatefulWidget {
   List<IncidentTypeModel> incidentTypes;
+
   IncidentFormWidget({required this.incidentTypes});
 
   @override
@@ -15,12 +18,32 @@ class IncidentFormWidget extends StatefulWidget {
 class _IncidentFormWidgetState extends State<IncidentFormWidget> {
   APIService apiService = APIService();
   int indexSelected = 0;
+  double latitude = 0;
+  double longitude = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     indexSelected = widget.incidentTypes.first.id;
+  }
+
+  registerIncident() {
+
+    Geolocator.getCurrentPosition().then((Position value){
+      latitude = value.latitude;
+      longitude = value.longitude;
+      IncidentAuxModel incidentAuxModel = IncidentAuxModel(
+        latitud: latitude,
+        longitud: longitude,
+        tipoIncidente: indexSelected,
+        estado: "Abierto",
+      );
+      apiService.registerIncident(incidentAuxModel);
+    });
+
+
+
   }
 
   @override
@@ -76,7 +99,7 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
                     .toList(),
                 onChanged: (int? value) {
                   indexSelected = value!;
-                  setState((){});
+                  setState(() {});
                 },
               ),
             ),
@@ -85,7 +108,7 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
           ButtonNormalWidget(
             text: "Enviar alerta",
             onPressed: () {
-              apiService.registerIncident();
+              registerIncident();
             },
           ),
           divider12,

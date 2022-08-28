@@ -1,11 +1,5 @@
 
 
-// To parse this JSON data, do
-//
-//     final incidentAuxModel = incidentAuxModelFromJson(jsonString);
-
-
-
 class IncidentAuxModel {
   IncidentAuxModel({
     required this.latitud,
