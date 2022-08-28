@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
+import 'package:flutter_codigo_alerta/pages/incident_page.dart';
 import 'package:flutter_codigo_alerta/pages/incident_type_page.dart';
 import 'package:flutter_codigo_alerta/pages/news_page.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
@@ -63,6 +64,11 @@ class HomePage extends StatelessWidget {
                           text: "Noticias",
                           toPage: NewsPage(),
                         ),
+                        ItemMenuWidget(
+                          text: "Incidentes",
+                          toPage: IncidentPage(),
+                        ),
+
 
                       ],
                     ),
