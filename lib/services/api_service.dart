@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_codigo_alerta/models/citizen_model.dart';
+import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
 import 'package:flutter_codigo_alerta/models/news_model.dart';
 import 'package:flutter_codigo_alerta/models/user_model.dart';
@@ -149,6 +150,28 @@ class APIService {
 
     return null;
 
+  }
+
+  Future<List<IncidentModel>> getIncidents() async{
+    try {
+      String path = "$pathProduction/incidentes/";
+      Uri url = Uri.parse(path);
+      http.Response response = await http.get(url);
+      if (response.statusCode == 200) {
+        List list = json.decode(response.body);
+        List<IncidentModel> incidentList = list.map((e) => IncidentModel.fromJson(e)).toList();
+        return incidentList;
+      }
+      return [];
+    } on TimeoutException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con servicio, inténtalo nuevamente.");
+    } on SocketException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con el interner, inténtalo nuevamente.");
+    } on Error catch (error) {
+      return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
+    }
   }
 
 
