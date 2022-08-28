@@ -19,6 +19,8 @@ class NewsFormPage extends StatefulWidget {
 }
 
 class _NewsFormPageState extends State<NewsFormPage> {
+
+  APIService apiService = APIService();
   XFile? imageSource;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController linkController = TextEditingController();
@@ -36,7 +38,6 @@ class _NewsFormPageState extends State<NewsFormPage> {
   }
 
   saveNews() async {
-    APIService apiService = APIService();
 
     NewsModel newsModel = NewsModel(
       id: 0,
@@ -46,15 +47,9 @@ class _NewsFormPageState extends State<NewsFormPage> {
       imagen: "",
     );
 
-    print(DateTime.now());
-    final DateFormat formatter = DateFormat('dd-MMMM-yyyy');
-    final String formatted = formatter.format(DateTime.now());
-    print(formatted);
-
-    // File file = File(imageSource!.path);
-    // File compressedFile =
-    //     await FlutterNativeImage.compressImage(file.path, quality: 80);
-    // apiService.registerNews(File(compressedFile.path));
+    File file = File(imageSource!.path);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, quality: 80);
+    apiService.registerNews(newsModel, compressedFile);
   }
 
   @override

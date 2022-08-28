@@ -7,6 +7,7 @@ import 'package:flutter_codigo_alerta/models/news_model.dart';
 import 'package:flutter_codigo_alerta/models/user_model.dart';
 import 'package:flutter_codigo_alerta/pages/citizen_page.dart';
 import 'package:flutter_codigo_alerta/utils/constants.dart';
+import 'package:flutter_codigo_alerta/utils/formatter.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
@@ -117,7 +118,7 @@ class APIService {
     }
   }
 
-  registerNews(File image) async{
+  registerNews(NewsModel model, File image) async{
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
@@ -131,9 +132,9 @@ class APIService {
     );
 
     request.files.add(file);
-    request.fields["titulo"] = "Noticia: Elvis enviado desde Flutter";
-    request.fields["link"] = "https://www.youtube.com/watch?v=acgLDCFHswE&ab_channel=WebDevSimplified";
-    request.fields["fecha"] = "2022-01-02";
+    request.fields["titulo"] = model.titulo;
+    request.fields["link"] = model.link;
+    request.fields["fecha"] = formatter.format(model.fecha);
 
     http.StreamedResponse streamedResponse = await request.send();
 
