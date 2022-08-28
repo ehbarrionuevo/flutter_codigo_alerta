@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 
 class IncidentFormWidget extends StatefulWidget {
@@ -24,32 +24,54 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
               fontSize: 15.0,
             ),
           ),
-          DropdownButton(
-            value: 1,
-            items: [
-              DropdownMenuItem(
+          divider20,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black87.withOpacity(0.05),
+                  blurRadius: 12,
+                  offset: const Offset(4, 4),
+                ),
+              ],
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
                 value: 1,
-                child: Text(
-                  "Elemento 1",
-                ),
+                isExpanded: true,
+                items: [
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text(
+                      "Elemento 1",
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text(
+                      "Elemento 2",
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 3,
+                    child: Text(
+                      "Elemento 3",
+                    ),
+                  ),
+                ],
+                onChanged: (value) {},
               ),
-              DropdownMenuItem(
-                value: 2,
-                child: Text(
-                  "Elemento 2",
-                ),
-              ),
-              DropdownMenuItem(
-                value: 3,
-                child: Text(
-                  "Elemento 3",
-                ),
-              ),
-            ],
-            onChanged: (value){
-
-            },
+            ),
           ),
+          divider20,
+          ButtonNormalWidget(
+            text: "Enviar alerta",
+            onPressed: () {},
+          ),
+          divider12,
         ],
       ),
     );
