@@ -20,7 +20,47 @@ class _IncidentPageState extends State<IncidentPage> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Text("Hola");
+        return Container(
+          padding: EdgeInsets.all(14.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              divider12,
+              Text(
+                "Por favor, selecciona y envia la alerta correspondiente.",
+                style: TextStyle(
+                  fontSize: 15.0,
+                ),
+              ),
+              DropdownButton(
+                value: 1,
+                items: [
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text(
+                      "Elemento 1",
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text(
+                      "Elemento 2",
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 3,
+                    child: Text(
+                      "Elemento 3",
+                    ),
+                  ),
+                ],
+                onChanged: (value){
+
+                },
+              ),
+            ],
+          ),
+        );
       },
     );
   }
@@ -30,7 +70,7 @@ class _IncidentPageState extends State<IncidentPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: kFontPrimaryColor,
-        onPressed: (){
+        onPressed: () {
           showRegisterIncident();
         },
         child: Icon(Icons.add),
