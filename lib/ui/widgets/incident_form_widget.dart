@@ -4,7 +4,6 @@ import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 
 class IncidentFormWidget extends StatefulWidget {
-
   List<IncidentTypeModel> incidentTypes;
   IncidentFormWidget({required this.incidentTypes});
 
@@ -13,6 +12,16 @@ class IncidentFormWidget extends StatefulWidget {
 }
 
 class _IncidentFormWidgetState extends State<IncidentFormWidget> {
+
+  int indexSelected = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    indexSelected = widget.incidentTypes.first.id;
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.incidentTypes);
@@ -37,7 +46,8 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
           ),
           divider20,
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(14.0),
@@ -51,29 +61,22 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
-                value: 1,
+                value: indexSelected,
                 isExpanded: true,
-                items: [
-                  DropdownMenuItem(
-                    value: 1,
-                    child: Text(
-                      "Elemento 1",
-                    ),
-                  ),
-                  DropdownMenuItem(
-                    value: 2,
-                    child: Text(
-                      "Elemento 2",
-                    ),
-                  ),
-                  DropdownMenuItem(
-                    value: 3,
-                    child: Text(
-                      "Elemento 3",
-                    ),
-                  ),
-                ],
-                onChanged: (value) {},
+                items: widget.incidentTypes
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e.id,
+                        child: Text(
+                          e.titulo,
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (int? value) {
+                  indexSelected = value!;
+                  setState((){});
+                },
               ),
             ),
           ),
