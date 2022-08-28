@@ -118,7 +118,8 @@ class APIService {
     }
   }
 
-  registerNews(NewsModel model, File image) async{
+  Future<NewsModel?> registerNews(NewsModel model, File image) async{
+
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
@@ -140,7 +141,14 @@ class APIService {
 
     http.Response response = await http.Response.fromStream(streamedResponse);
 
-    print(response.statusCode);
+    if(response.statusCode == 201){
+      String responseDecode =  utf8.decode(response.bodyBytes);
+      Map<String, dynamic> myMap = json.decode(responseDecode);
+      NewsModel newsModel = NewsModel.fromJson(myMap);
+      return newsModel;
+    }
+
+    return null;
 
   }
 

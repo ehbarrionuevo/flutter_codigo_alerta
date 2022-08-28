@@ -56,7 +56,8 @@ class _NewsFormPageState extends State<NewsFormPage> {
             await FlutterNativeImage.compressImage(file.path, quality: 80);
         apiService.registerNews(newsModel, compressedFile);
       } else {
-
+        imageNoSelected = true;
+        setState((){});
       }
     }
   }
@@ -85,7 +86,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                 divider20,
                 TextFieldNormalWidget(
                   hintText: "Link noticia",
-                  controller: titleController,
+                  controller: linkController,
                 ),
                 divider20,
                 Divider(),
