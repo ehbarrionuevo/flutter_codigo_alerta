@@ -19,37 +19,46 @@ class NewsFormPage extends StatefulWidget {
 }
 
 class _NewsFormPageState extends State<NewsFormPage> {
-
+  final formKey = GlobalKey<FormState>();
   APIService apiService = APIService();
   XFile? imageSource;
+  bool imageNoSelected = true;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController linkController = TextEditingController();
 
   getImageGallery() async {
     ImagePicker _imagePicker = ImagePicker();
     imageSource = await _imagePicker.pickImage(source: ImageSource.gallery);
+    imageNoSelected = false;
     setState(() {});
   }
 
   getImageCamera() async {
     ImagePicker _imagePicker = ImagePicker();
     imageSource = await _imagePicker.pickImage(source: ImageSource.camera);
+    imageNoSelected = false;
     setState(() {});
   }
 
   saveNews() async {
+    if (formKey.currentState!.validate()) {
+      NewsModel newsModel = NewsModel(
+        id: 0,
+        link: linkController.text,
+        titulo: titleController.text,
+        fecha: DateTime.now(),
+        imagen: "",
+      );
 
-    NewsModel newsModel = NewsModel(
-      id: 0,
-      link: linkController.text,
-      titulo: titleController.text,
-      fecha: DateTime.now(),
-      imagen: "",
-    );
+      if (imageSource != null) {
+        File file = File(imageSource!.path);
+        File compressedFile =
+            await FlutterNativeImage.compressImage(file.path, quality: 80);
+        apiService.registerNews(newsModel, compressedFile);
+      } else {
 
-    File file = File(imageSource!.path);
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, quality: 80);
-    apiService.registerNews(newsModel, compressedFile);
+      }
+    }
   }
 
   @override
@@ -64,83 +73,95 @@ class _NewsFormPageState extends State<NewsFormPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFieldNormalWidget(
-                hintText: "Título noticia",
-                controller: titleController,
-              ),
-              divider20,
-              TextFieldNormalWidget(
-                hintText: "Link noticia",
-                controller: titleController,
-              ),
-              divider20,
-              Divider(),
-              Text(
-                "Seleccionar imagen",
-              ),
-              divider12,
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        getImageGallery();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.indigo,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      icon: Icon(Icons.image),
-                      label: const Text(
-                        "Galería",
-                      ),
-                    ),
-                  ),
-                  divider10Width,
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        getImageCamera();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xffF6AA26),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      icon: Icon(Icons.camera_alt),
-                      label: const Text(
-                        "Cámara",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              divider20,
-              ClipRRect(
-                borderRadius: BorderRadius.circular(14.0),
-                child: Image(
-                  image: imageSource != null
-                      ? FileImage(File(imageSource!.path))
-                      : AssetImage("assets/images/error.jpg") as ImageProvider,
-                  width: double.infinity,
-                  height: 280.0,
-                  fit: BoxFit.cover,
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFieldNormalWidget(
+                  hintText: "Título noticia",
+                  controller: titleController,
                 ),
-              ),
-              divider30,
-              ButtonNormalWidget(
-                text: "Guardar",
-                onPressed: () {
-                  saveNews();
-                },
-              ),
-            ],
+                divider20,
+                TextFieldNormalWidget(
+                  hintText: "Link noticia",
+                  controller: titleController,
+                ),
+                divider20,
+                Divider(),
+                Text(
+                  "Seleccionar imagen",
+                ),
+                divider12,
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          getImageGallery();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.indigo,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        icon: Icon(Icons.image),
+                        label: const Text(
+                          "Galería",
+                        ),
+                      ),
+                    ),
+                    divider10Width,
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          getImageCamera();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xffF6AA26),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        icon: Icon(Icons.camera_alt),
+                        label: const Text(
+                          "Cámara",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                divider20,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14.0),
+                  child: Image(
+                    image: imageSource != null
+                        ? FileImage(File(imageSource!.path))
+                        : AssetImage("assets/images/error.jpg")
+                            as ImageProvider,
+                    width: double.infinity,
+                    height: 280.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                divider6,
+                imageNoSelected ? const Text(
+                  "  Selecciona una imagen",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 13.0
+                  ),
+                ) : const SizedBox(),
+                divider30,
+                ButtonNormalWidget(
+                  text: "Guardar",
+                  onPressed: () {
+                    saveNews();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
