@@ -71,34 +71,40 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: widget.incidents.map((e) => Container(
-                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10.0),
-                  margin:  EdgeInsets.symmetric(horizontal: 6, vertical: 12.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.network(
-                          "https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                          height: 100,
-                          width: 80,
-                          fit: BoxFit.cover,
+                children: widget.incidents.map((e) => InkWell(
+                  onTap: (){
+                    showDetailIncident(e);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10.0),
+                    margin:  const EdgeInsets.symmetric(horizontal: 6, vertical: 12.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.network(
+                            "https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            height: 100,
+                            width: 80,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      divider10Width,
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
-                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
-                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
-                        ],
-                      ),
-                    ],
+                        divider10Width,
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IncidentDetailWidget(title: "Tipo de alerta", description: e.tipoIncidente.titulo,),
+                            IncidentDetailWidget(title: "Ciudadano", description: e.datosCiudadano.nombres,),
+                            IncidentDetailWidget(title: "Teléfono", description: e.datosCiudadano.telefono,),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),).toList(),
               ),
