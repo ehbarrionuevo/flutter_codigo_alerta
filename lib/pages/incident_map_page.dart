@@ -67,9 +67,11 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                Container(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: widget.incidents.map((e) => Container(
                   padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10.0),
                   margin:  EdgeInsets.symmetric(horizontal: 6, vertical: 12.0),
                   decoration: BoxDecoration(
@@ -98,8 +100,8 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
                       ),
                     ],
                   ),
-                ),
-              ],
+                ),).toList(),
+              ),
             ),
           ),
         ],
