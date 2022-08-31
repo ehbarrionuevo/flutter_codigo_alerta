@@ -54,7 +54,8 @@ class _IncidentPageState extends State<IncidentPage> {
           ),
           contentPadding: EdgeInsets.zero,
           content: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 14.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 14.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -84,25 +85,49 @@ class _IncidentPageState extends State<IncidentPage> {
                   description: model.datosCiudadano.nombres,
                 ),
                 InkWell(
-                  onTap: () async{
-                    await FlutterPhoneDirectCaller.callNumber(model.datosCiudadano.telefono);
+                  onTap: () async {
+                    await FlutterPhoneDirectCaller.callNumber(
+                        model.datosCiudadano.telefono);
                   },
                   child: IncidentDetailWidget(
                     title: "Teléfono",
                     description: model.datosCiudadano.telefono,
                   ),
                 ),
-
                 InkWell(
-                  onTap: (){
-                    launchUrl(Uri.parse("https://www.google.com/maps/?q=${model.latitud},${model.longitud}"));
+                  onTap: () {
+                    launchUrl(Uri.parse(
+                        "https://www.google.com/maps/?q=${model.latitud},${model.longitud}"));
                   },
                   child: IncidentDetailWidget(
                     title: "Ubicación",
                     description: "Ver en el mapa",
                   ),
                 ),
-
+                IncidentDetailWidget(
+                  title: "Origen",
+                  description: model.tipoOrigen,
+                ),
+                divider6,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: kFontPrimaryColor,
+                      ),
+                      child: Text(
+                        "Aceptar",
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
