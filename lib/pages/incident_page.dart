@@ -155,7 +155,7 @@ class _IncidentPageState extends State<IncidentPage> {
                 shape: BoxShape.circle,
                 color: kFontPrimaryColor,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.location_on,
                 color: Colors.white,
               ),
