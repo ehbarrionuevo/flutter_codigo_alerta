@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class IncidentMapPage extends StatefulWidget {
-  const IncidentMapPage({Key? key}) : super(key: key);
+
+  List<IncidentModel> incidents;
+  IncidentMapPage({required this.incidents});
 
   @override
   State<IncidentMapPage> createState() => _IncidentMapPageState();
@@ -13,6 +16,7 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.incidents);
     return Scaffold(
       body: GoogleMap(
         initialCameraPosition: const CameraPosition(
@@ -21,7 +25,7 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
         ),
         onTap: (LatLng position) {
           Marker myMarker = Marker(
-            markerId: MarkerId("id001"),
+            markerId: MarkerId(_markers.length.toString()),
             position: position
           );
           _markers.add(myMarker);

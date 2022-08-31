@@ -22,6 +22,7 @@ class IncidentPage extends StatefulWidget {
 class _IncidentPageState extends State<IncidentPage> {
   APIService apiService = APIService();
   List<IncidentTypeModel> incidentTypes = [];
+  List<IncidentModel> incidents = [];
 
   @override
   initState() {
@@ -146,7 +147,7 @@ class _IncidentPageState extends State<IncidentPage> {
           InkWell(
             onTap: (){
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => IncidentMapPage()));
+                  MaterialPageRoute(builder: (context) => IncidentMapPage(incidents: incidents,)));
             },
             child: Container(
               height: 54,
@@ -181,7 +182,9 @@ class _IncidentPageState extends State<IncidentPage> {
         future: apiService.getIncidents(),
         builder: (BuildContext context, AsyncSnapshot snap) {
           if (snap.hasData) {
-            List<IncidentModel> incidents = snap.data;
+
+            incidents = snap.data;
+
             return ListView.builder(
               itemCount: incidents.length,
               itemBuilder: (BuildContext context, int index) {
