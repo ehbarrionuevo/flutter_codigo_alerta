@@ -80,7 +80,8 @@ class APIService {
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         List list = json.decode(response.body);
-        List<IncidentTypeModel> incidentTypeList = list.map((e) => IncidentTypeModel.fromJson(e)).toList();
+        List<IncidentTypeModel> incidentTypeList =
+            list.map((e) => IncidentTypeModel.fromJson(e)).toList();
         return incidentTypeList;
       }
       return [];
@@ -95,17 +96,16 @@ class APIService {
     }
   }
 
-
-
   Future<List<NewsModel>> getNews() async {
     try {
       String path = "$pathProduction/noticias/";
       Uri url = Uri.parse(path);
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
-        String responseDecode =  utf8.decode(response.bodyBytes);
+        String responseDecode = utf8.decode(response.bodyBytes);
         List list = json.decode(responseDecode);
-        List<NewsModel> newsList = list.map((e) => NewsModel.fromJson(e)).toList();
+        List<NewsModel> newsList =
+            list.map((e) => NewsModel.fromJson(e)).toList();
         return newsList;
       }
       return [];
@@ -120,8 +120,7 @@ class APIService {
     }
   }
 
-  Future<NewsModel?> registerNews(NewsModel model, File image) async{
-
+  Future<NewsModel?> registerNews(NewsModel model, File image) async {
     String path = "$pathProduction/noticias/";
     Uri url = Uri.parse(path);
     final request = http.MultipartRequest("POST", url);
@@ -136,31 +135,31 @@ class APIService {
     request.files.add(file);
     request.fields["titulo"] = model.titulo;
     request.fields["link"] = model.link;
-    request.fields["fecha"] = model.fecha.toString().substring(0,10);
+    request.fields["fecha"] = model.fecha.toString().substring(0, 10);
 
     http.StreamedResponse streamedResponse = await request.send();
 
     http.Response response = await http.Response.fromStream(streamedResponse);
     print(response.statusCode);
-    if(response.statusCode == 201){
-      String responseDecode =  utf8.decode(response.bodyBytes);
+    if (response.statusCode == 201) {
+      String responseDecode = utf8.decode(response.bodyBytes);
       Map<String, dynamic> myMap = json.decode(responseDecode);
       NewsModel newsModel = NewsModel.fromJson(myMap);
       return newsModel;
     }
 
     return null;
-
   }
 
-  Future<List<IncidentModel>> getIncidents() async{
+  Future<List<IncidentModel>> getIncidents() async {
     try {
       String path = "$pathProduction/incidentes/";
       Uri url = Uri.parse(path);
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         List list = json.decode(response.body);
-        List<IncidentModel> incidentList = list.map((e) => IncidentModel.fromJson(e)).toList();
+        List<IncidentModel> incidentList =
+            list.map((e) => IncidentModel.fromJson(e)).toList();
         return incidentList;
       }
       return [];
@@ -175,38 +174,41 @@ class APIService {
     }
   }
 
+  Future<IncidentModel?> registerIncident(IncidentAuxModel model) async {
+    try {
+      String path = "$pathProduction/incidentes/crear/";
+      Uri url = Uri.parse(path);
+      http.Response response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Token 4ba755b2add893f43e5fa004f7fe3b67d4249f38",
+        },
+        // body: json.encode(
+        //     {
+        //       "latitud": -16.361625,
+        //       "longitud": -71.568773,
+        //       "tipoIncidente": 2,
+        //       "estado": "Abierto"
+        //     }
+        // ),
+        body: json.encode(model.toJson()),
+      );
 
-  Future<IncidentModel?> registerIncident(IncidentAuxModel model) async{
-
-    String path = "$pathProduction/incidentes/crear/";
-    Uri url = Uri.parse(path);
-    http.Response response = await http.post(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Token 4ba755b2add893f43e5fa004f7fe3b67d4249f38",
-      },
-      // body: json.encode(
-      //     {
-      //       "latitud": -16.361625,
-      //       "longitud": -71.568773,
-      //       "tipoIncidente": 2,
-      //       "estado": "Abierto"
-      //     }
-      // ),
-      body: json.encode(model.toJson()),
-    );
-
-    if(response.statusCode == 201){
-      Map<String, dynamic> myMap = json.decode(response.body);
-      IncidentModel incidentModel = IncidentModel.fromJson(myMap);
-      return incidentModel;
+      if (response.statusCode == 201) {
+        Map<String, dynamic> myMap = json.decode(response.body);
+        IncidentModel incidentModel = IncidentModel.fromJson(myMap);
+        return incidentModel;
+      }
+      return null;
+    } on TimeoutException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con servicio, inténtalo nuevamente.");
+    } on SocketException catch (error) {
+      return Future.error(
+          "Hubo un inconveniente con el interner, inténtalo nuevamente.");
+    } on Error catch (error) {
+      return Future.error("Hubo un inconveniente, inténtalo nuevamente.");
     }
-
-    return null;
-
   }
-
-
-
 }

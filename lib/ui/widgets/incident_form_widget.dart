@@ -39,7 +39,14 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
         tipoIncidente: indexSelected,
         estado: "Abierto",
       );
-      apiService.registerIncident(incidentAuxModel);
+      apiService.registerIncident(incidentAuxModel).then((value){
+        if(value != null){
+          showSnackBarSuccess(context, "Alerta enviada con éxito");
+          Navigator.pop(context);
+        }else{
+          showSnackBarError(context, "Hubo un inconveniente, por favor, inténtalo nuevamnete");
+        }
+      });
     });
 
   }
