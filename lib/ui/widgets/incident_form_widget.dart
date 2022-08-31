@@ -64,8 +64,8 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
     double height = MediaQuery.of(context).size.height;
     return Container(
       height: height * 0.32,
-      padding: EdgeInsets.all(14.0),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(14.0),
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),

@@ -16,15 +16,14 @@ class IncidentPage extends StatefulWidget {
 }
 
 class _IncidentPageState extends State<IncidentPage> {
-
   APIService apiService = APIService();
   List<IncidentTypeModel> incidentTypes = [];
 
   @override
-  initState(){
+  initState() {
     super.initState();
-    apiService.getIncidentTypes().then((value){
-      if(value.isNotEmpty){
+    apiService.getIncidentTypes().then((value) {
+      if (value.isNotEmpty) {
         incidentTypes = value;
       }
     });
@@ -38,6 +37,15 @@ class _IncidentPageState extends State<IncidentPage> {
         return IncidentFormWidget(
           incidentTypes: incidentTypes,
         );
+      },
+    );
+  }
+
+  showDetailIncident() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog();
       },
     );
   }
@@ -70,6 +78,9 @@ class _IncidentPageState extends State<IncidentPage> {
                   title: incidents[index].tipoIncidente.titulo,
                   subtitle:
                       "${incidents[index].datosCiudadano.nombres} | ${incidents[index].fecha}",
+                  onTap: () {
+                    showDetailIncident();
+                  },
                 );
               },
             );
