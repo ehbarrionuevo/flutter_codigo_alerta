@@ -3,8 +3,8 @@ import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class IncidentMapPage extends StatefulWidget {
-
   List<IncidentModel> incidents;
+
   IncidentMapPage({required this.incidents});
 
   @override
@@ -13,6 +13,23 @@ class IncidentMapPage extends StatefulWidget {
 
 class _IncidentMapPageState extends State<IncidentMapPage> {
   Set<Marker> _markers = {};
+
+  @override
+  initState(){
+    super.initState();
+    getMarkers();
+  }
+
+  getMarkers() {
+    widget.incidents.forEach((element) {
+      Marker myMarker = Marker(
+        markerId: MarkerId(_markers.length.toString()),
+        position: LatLng(element.latitud, element.longitud),
+      );
+      _markers.add(myMarker);
+    });
+    setState((){});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +42,10 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
         ),
         onTap: (LatLng position) {
           Marker myMarker = Marker(
-            markerId: MarkerId(_markers.length.toString()),
-            position: position
-          );
+              markerId: MarkerId(_markers.length.toString()),
+              position: position);
           _markers.add(myMarker);
-          setState((){});
+          setState(() {});
         },
         markers: _markers,
       ),
