@@ -20,6 +20,7 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
   int indexSelected = 0;
   double latitude = 0;
   double longitude = 0;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -29,7 +30,8 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
   }
 
   registerIncident() {
-
+    isLoading = true;
+    setState((){});
     Geolocator.getCurrentPosition().then((Position value){
       latitude = value.latitude;
       longitude = value.longitude;
@@ -41,6 +43,8 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
       );
       apiService.registerIncident(incidentAuxModel).then((value){
         if(value != null){
+          isLoading = false;
+          setState((){});
           showSnackBarSuccess(context, "Alerta enviada con éxito");
           Navigator.pop(context);
         }else{
