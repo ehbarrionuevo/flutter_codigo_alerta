@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/incident_model.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/alert_incident_detail_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class IncidentMapPage extends StatefulWidget {
@@ -25,11 +26,25 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
       Marker myMarker = Marker(
         markerId: MarkerId(_markers.length.toString()),
         position: LatLng(element.latitud, element.longitud),
+        onTap: (){
+          showDetailIncident(element);
+        }
       );
       _markers.add(myMarker);
     });
     setState((){});
   }
+
+
+  showDetailIncident(IncidentModel model) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertIncidentDetailWidget(model: model);
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
