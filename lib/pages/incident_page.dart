@@ -45,7 +45,50 @@ class _IncidentPageState extends State<IncidentPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog();
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          contentPadding: EdgeInsets.zero,
+          content: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 14.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Detalle de la alerta",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                    color: kFontPrimaryColor,
+                  ),
+                ),
+                Divider(),
+                Row(
+                  children: [
+                    Text(
+                      "Tipo de Alerta:",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                        color: kFontPrimaryColor.withOpacity(0.85),
+                      ),
+                    ),
+                    divider10Width,
+                    Text(
+                      "Secuestro",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                        color: kFontPrimaryColor.withOpacity(0.85),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
