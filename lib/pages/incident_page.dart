@@ -65,10 +65,18 @@ class _IncidentPageState extends State<IncidentPage> {
                   ),
                 ),
                 Divider(),
-                IncidentDetailWidget(),
-                IncidentDetailWidget(),
-                IncidentDetailWidget(),
-                IncidentDetailWidget(),
+                IncidentDetailWidget(
+                  title: "Tipo de alerta",
+                  description: "Secuestro",
+                ),
+                IncidentDetailWidget(
+                  title: "Fecha",
+                  description: "2022-02-20",
+                ),
+                IncidentDetailWidget(
+                  title: "Hora",
+                  description: "20:22:11",
+                ),
               ],
             ),
           ),

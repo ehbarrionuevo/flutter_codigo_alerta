@@ -1,10 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
 
 class IncidentDetailWidget extends StatelessWidget {
-  const IncidentDetailWidget({Key? key}) : super(key: key);
+  String title;
+  String description;
+
+  IncidentDetailWidget({
+    required this.title,
+    required this.description,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +18,7 @@ class IncidentDetailWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "Tipo de Alerta:",
+            '$title:',
             style: TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.bold,
@@ -21,7 +27,7 @@ class IncidentDetailWidget extends StatelessWidget {
           ),
           divider10Width,
           Text(
-            "Secuestro",
+            description,
             style: TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.normal,
