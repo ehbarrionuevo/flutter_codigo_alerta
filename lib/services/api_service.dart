@@ -176,7 +176,7 @@ class APIService {
   }
 
 
-  registerIncident(IncidentAuxModel model) async{
+  Future<IncidentModel?> registerIncident(IncidentAuxModel model) async{
 
     String path = "$pathProduction/incidentes/crear/";
     Uri url = Uri.parse(path);
@@ -197,7 +197,13 @@ class APIService {
       body: json.encode(model.toJson()),
     );
 
-    print(response.statusCode);
+    if(response.statusCode == 201){
+      Map<String, dynamic> myMap = json.decode(response.body);
+      IncidentModel incidentModel = IncidentModel.fromJson(myMap);
+      return incidentModel;
+    }
+
+    return null;
 
   }
 

@@ -42,8 +42,6 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
       apiService.registerIncident(incidentAuxModel);
     });
 
-
-
   }
 
   @override
