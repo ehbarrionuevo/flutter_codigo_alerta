@@ -57,8 +57,9 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.incidentTypes);
+    double height = MediaQuery.of(context).size.height;
     return Container(
+      height: height * 0.32,
       padding: EdgeInsets.all(14.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -67,60 +68,68 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
         ),
         color: Colors.white,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
         children: [
-          divider12,
-          const Text(
-            "Por favor, selecciona y envia la alerta correspondiente.",
-            style: TextStyle(
-              fontSize: 15.0,
-            ),
-          ),
-          divider20,
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black87.withOpacity(0.05),
-                  blurRadius: 12,
-                  offset: const Offset(4, 4),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              divider12,
+              const Text(
+                "Por favor, selecciona y envia la alerta correspondiente.",
+                style: TextStyle(
+                  fontSize: 15.0,
                 ),
-              ],
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                value: indexSelected,
-                isExpanded: true,
-                items: widget.incidentTypes
-                    .map(
-                      (e) => DropdownMenuItem(
+              ),
+              divider20,
+              Container(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black87.withOpacity(0.05),
+                      blurRadius: 12,
+                      offset: const Offset(4, 4),
+                    ),
+                  ],
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: indexSelected,
+                    isExpanded: true,
+                    items: widget.incidentTypes
+                        .map(
+                          (e) => DropdownMenuItem(
                         value: e.id,
                         child: Text(
                           e.titulo,
                         ),
                       ),
                     )
-                    .toList(),
-                onChanged: (int? value) {
-                  indexSelected = value!;
-                  setState(() {});
+                        .toList(),
+                    onChanged: (int? value) {
+                      indexSelected = value!;
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ),
+              divider20,
+              ButtonNormalWidget(
+                text: "Enviar alerta",
+                onPressed: () {
+                  registerIncident();
                 },
               ),
-            ),
+              divider12,
+            ],
           ),
-          divider20,
-          ButtonNormalWidget(
-            text: "Enviar alerta",
-            onPressed: () {
-              registerIncident();
-            },
-          ),
-          divider12,
+          isLoading ? Container(
+            color: Colors.white.withOpacity(0.50),
+            child: loadingWidget(),
+          ) : const SizedBox(),
         ],
       ),
     );
