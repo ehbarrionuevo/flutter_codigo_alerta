@@ -16,7 +16,7 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
   Set<Marker> _markers = {};
 
   @override
-  initState(){
+  initState() {
     super.initState();
     getMarkers();
   }
@@ -24,17 +24,15 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
   getMarkers() {
     widget.incidents.forEach((element) {
       Marker myMarker = Marker(
-        markerId: MarkerId(_markers.length.toString()),
-        position: LatLng(element.latitud, element.longitud),
-        onTap: (){
-          showDetailIncident(element);
-        }
-      );
+          markerId: MarkerId(_markers.length.toString()),
+          position: LatLng(element.latitud, element.longitud),
+          onTap: () {
+            showDetailIncident(element);
+          });
       _markers.add(myMarker);
     });
-    setState((){});
+    setState(() {});
   }
-
 
   showDetailIncident(IncidentModel model) {
     showDialog(
@@ -45,24 +43,43 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     print(widget.incidents);
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: const CameraPosition(
-          zoom: 6,
-          target: LatLng(-16.382905, -71.543986),
-        ),
-        onTap: (LatLng position) {
-          Marker myMarker = Marker(
-              markerId: MarkerId(_markers.length.toString()),
-              position: position);
-          _markers.add(myMarker);
-          setState(() {});
-        },
-        markers: _markers,
+      body: Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: const CameraPosition(
+              zoom: 6,
+              target: LatLng(-16.382905, -71.543986),
+            ),
+            // onTap: (LatLng position) {
+            //   Marker myMarker = Marker(
+            //       markerId: MarkerId(_markers.length.toString()),
+            //       position: position);
+            //   _markers.add(myMarker);
+            //   setState(() {});
+            // },
+            markers: _markers,
+          ),
+          Row(
+            children: [
+              Container(
+                child: Row(
+                  children: [
+                    Image.network(
+                      "https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                      height: 100,
+                      width: 80,
+                      fit: BoxFit.cover,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
