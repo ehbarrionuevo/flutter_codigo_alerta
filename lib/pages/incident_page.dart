@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
+import 'package:flutter_codigo_alerta/pages/incident_map_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
@@ -139,12 +140,36 @@ class _IncidentPageState extends State<IncidentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kFontPrimaryColor,
-        onPressed: () {
-          showRegisterIncident();
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          InkWell(
+            onTap: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => IncidentMapPage()));
+            },
+            child: Container(
+              height: 54,
+              width: 54,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: kFontPrimaryColor,
+              ),
+              child: Icon(
+                Icons.location_on,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          divider6,
+          FloatingActionButton(
+            backgroundColor: kFontPrimaryColor,
+            onPressed: () {
+              showRegisterIncident();
+            },
+            child: Icon(Icons.add),
+          ),
+        ],
       ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
