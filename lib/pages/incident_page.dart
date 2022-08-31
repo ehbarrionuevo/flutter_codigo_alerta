@@ -9,6 +9,7 @@ import 'package:flutter_codigo_alerta/ui/widgets/incident_form_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/item_list_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IncidentPage extends StatefulWidget {
   const IncidentPage({Key? key}) : super(key: key);
@@ -91,6 +92,17 @@ class _IncidentPageState extends State<IncidentPage> {
                     description: model.datosCiudadano.telefono,
                   ),
                 ),
+
+                InkWell(
+                  onTap: (){
+                    launchUrl(Uri.parse("https://www.google.com/maps/?q=${model.latitud},${model.longitud}"));
+                  },
+                  child: IncidentDetailWidget(
+                    title: "Ubicación",
+                    description: "Ver en el mapa",
+                  ),
+                ),
+
               ],
             ),
           ),
