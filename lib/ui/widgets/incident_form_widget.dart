@@ -48,8 +48,12 @@ class _IncidentFormWidgetState extends State<IncidentFormWidget> {
           showSnackBarSuccess(context, "Alerta enviada con éxito");
           Navigator.pop(context);
         }else{
-          showSnackBarError(context, "Hubo un inconveniente, por favor, inténtalo nuevamnete");
+          showSnackBarError(context, "Hubo un inconveniente, por favor, inténtalo nuevamente");
         }
+      }).catchError((error){
+        showSnackBarError(context, error);
+        isLoading = false;
+        setState((){});
       });
     });
 
