@@ -8,6 +8,7 @@ import 'package:flutter_codigo_alerta/ui/widgets/incident_detail_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/incident_form_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/item_list_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class IncidentPage extends StatefulWidget {
   const IncidentPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _IncidentPageState extends State<IncidentPage> {
     );
   }
 
-  showDetailIncident() {
+  showDetailIncident(IncidentModel model) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -67,15 +68,28 @@ class _IncidentPageState extends State<IncidentPage> {
                 Divider(),
                 IncidentDetailWidget(
                   title: "Tipo de alerta",
-                  description: "Secuestro",
+                  description: model.tipoIncidente.titulo,
                 ),
                 IncidentDetailWidget(
                   title: "Fecha",
-                  description: "2022-02-20",
+                  description: model.fecha,
                 ),
                 IncidentDetailWidget(
                   title: "Hora",
-                  description: "20:22:11",
+                  description: model.hora,
+                ),
+                IncidentDetailWidget(
+                  title: "Ciudadano",
+                  description: model.datosCiudadano.nombres,
+                ),
+                InkWell(
+                  onTap: () async{
+                    await FlutterPhoneDirectCaller.callNumber(model.datosCiudadano.telefono);
+                  },
+                  child: IncidentDetailWidget(
+                    title: "Teléfono",
+                    description: model.datosCiudadano.telefono,
+                  ),
                 ),
               ],
             ),
@@ -114,7 +128,7 @@ class _IncidentPageState extends State<IncidentPage> {
                   subtitle:
                       "${incidents[index].datosCiudadano.nombres} | ${incidents[index].fecha}",
                   onTap: () {
-                    showDetailIncident();
+                    showDetailIncident(incidents[index]);
                   },
                 );
               },
