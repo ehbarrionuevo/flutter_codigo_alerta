@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/alert_incident_detail_widget.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/general_widget.dart';
+import 'package:flutter_codigo_alerta/ui/widgets/incident_detail_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class IncidentMapPage extends StatefulWidget {
@@ -63,21 +65,42 @@ class _IncidentMapPageState extends State<IncidentMapPage> {
             // },
             markers: _markers,
           ),
-          Row(
-            children: [
-              Container(
-                child: Row(
-                  children: [
-                    Image.network(
-                      "https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                      height: 100,
-                      width: 80,
-                      fit: BoxFit.cover,
-                    )
-                  ],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10.0),
+                  margin:  EdgeInsets.symmetric(horizontal: 6, vertical: 12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.network(
+                          "https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                          height: 100,
+                          width: 80,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      divider10Width,
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
+                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
+                          IncidentDetailWidget(title: "Tipo de alerta", description: "Mordedura",),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
