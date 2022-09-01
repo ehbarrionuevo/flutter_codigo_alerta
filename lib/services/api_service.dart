@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_codigo_alerta/helpers/sp_global.dart';
 import 'package:flutter_codigo_alerta/models/citizen_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_aux_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_model.dart';
@@ -176,13 +177,14 @@ class APIService {
 
   Future<IncidentModel?> registerIncident(IncidentAuxModel model) async {
     try {
+      SPGlobal prefs = SPGlobal();
       String path = "$pathProduction/incidentes/crear/";
       Uri url = Uri.parse(path);
       http.Response response = await http.post(
         url,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Token 4ba755b2add893f43e5fa004f7fe3b67d4249f38",
+          "Authorization": "Token ${prefs.token}",
         },
         // body: json.encode(
         //     {
