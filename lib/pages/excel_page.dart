@@ -42,8 +42,6 @@ class ExcelPage extends StatelessWidget {
       sheet.cell(CellIndex.indexByColumnRow(columnIndex: 8, rowIndex: index)).value = incidents[index].datosCiudadano.telefono;
     }
 
-
-
     List<int>? bytes = excel.save();
     Directory directory = await getApplicationDocumentsDirectory();
     File fileExcel = File("${directory.path}/excel_alerta.xlsx");

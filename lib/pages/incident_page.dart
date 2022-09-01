@@ -3,6 +3,7 @@ import 'package:flutter_codigo_alerta/models/incident_model.dart';
 import 'package:flutter_codigo_alerta/models/incident_type_model.dart';
 import 'package:flutter_codigo_alerta/pages/excel_page.dart';
 import 'package:flutter_codigo_alerta/pages/incident_map_page.dart';
+import 'package:flutter_codigo_alerta/pages/pdf_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/alert_incident_detail_widget.dart';
@@ -64,6 +65,18 @@ class _IncidentPageState extends State<IncidentPage> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          ButtonMenuWidget(
+            iconData: Icons.picture_as_pdf,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PdfPage(),
+                ),
+              );
+            },
+          ),
+          divider6,
           ButtonMenuWidget(
             iconData: Icons.file_open,
             onTap: () {
