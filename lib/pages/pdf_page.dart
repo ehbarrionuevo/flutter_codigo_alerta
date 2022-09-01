@@ -44,15 +44,59 @@ class PdfPage extends StatelessWidget {
               ],
             ),
             pw.Divider(),
-            pw.ListView(
-              children: List.generate(
-                200,
-                (index) => pw.Container(
-                  child: pw.Text(
-                    "Hola",
-                  ),
-                ),
+            // pw.ListView(
+            //   children: List.generate(
+            //     200,
+            //     (index) => pw.Container(
+            //       child: pw.Text(
+            //         "Hola",
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            pw.Container(
+              margin: pw.EdgeInsets.symmetric(vertical: 20.0),
+              height: 100,
+              width: double.infinity,
+              alignment: pw.Alignment.center,
+              decoration: pw.BoxDecoration(
+                color: PdfColors.indigo100,
+                borderRadius: pw.BorderRadius.circular(14.0),
               ),
+              child: pw.Text("Hola"),
+            ),
+            pw.Container(
+              margin: pw.EdgeInsets.symmetric(vertical: 20.0),
+              height: 100,
+              width: double.infinity,
+              alignment: pw.Alignment.center,
+              decoration: pw.BoxDecoration(
+                color: PdfColors.indigo100,
+                borderRadius: pw.BorderRadius.circular(14.0),
+              ),
+              child: pw.Text("Hola"),
+            ),
+            pw.Container(
+              margin: pw.EdgeInsets.symmetric(vertical: 20.0),
+              height: 100,
+              width: double.infinity,
+              alignment: pw.Alignment.center,
+              decoration: pw.BoxDecoration(
+                color: PdfColors.indigo100,
+                borderRadius: pw.BorderRadius.circular(14.0),
+              ),
+              child: pw.Text("Hola"),
+            ),
+            pw.Container(
+              margin: pw.EdgeInsets.symmetric(vertical: 20.0),
+              height: 100,
+              width: double.infinity,
+              alignment: pw.Alignment.center,
+              decoration: pw.BoxDecoration(
+                color: PdfColors.indigo100,
+                borderRadius: pw.BorderRadius.circular(14.0),
+              ),
+              child: pw.Text("Hola"),
             ),
           ];
         },
