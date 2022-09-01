@@ -1,11 +1,23 @@
 
 
+import 'dart:io';
+
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ExcelPage extends StatelessWidget {
-  const ExcelPage({Key? key}) : super(key: key);
+
+  saveExcel()async {
+    Excel excel = Excel.createExcel();
+    Sheet? sheet = excel.sheets[excel.getDefaultSheet() as String];
+    sheet!.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 1)).value = "Hola";
+    List<int>? bytes = excel.save();
+    Directory directory = await getApplicationDocumentsDirectory();
+    print(directory.path);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +32,9 @@ class ExcelPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ButtonNormalWidget(
-            onPressed: (){},
+            onPressed: (){
+              saveExcel();
+            },
             text: "Generar Excel",
           ),
         ),
