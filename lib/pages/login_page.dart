@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_alerta/helpers/sp_global.dart';
 import 'package:flutter_codigo_alerta/pages/home_page.dart';
 import 'package:flutter_codigo_alerta/services/api_service.dart';
 import 'package:flutter_codigo_alerta/ui/general/colors.dart';
@@ -16,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController dniController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  SPGlobal spGlobal = SPGlobal();
 
   void _login() {
     if (_formKey.currentState!.validate()) {
@@ -25,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
       String pwd = passwordController.text;
       apiService.login(username, pwd).then((value) {
         if (value != null) {
+          spGlobal.isLogin = true;
+          spGlobal.token = value.token!;
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> HomePage()), (route) => false);
         } else {
           showSnackBarError(context, "Credenciales incorrectas");
