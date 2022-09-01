@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController dniController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  _login() {
+  void _login() {
     if (_formKey.currentState!.validate()) {
       APIService apiService = APIService();
 
@@ -25,8 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       String pwd = passwordController.text;
       apiService.login(username, pwd).then((value) {
         if (value != null) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> HomePage()), (route) => false);
         } else {
           showSnackBarError(context, "Credenciales incorrectas");
         }
