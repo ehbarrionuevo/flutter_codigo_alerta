@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/button_normal_widget.dart';
 import 'package:flutter_codigo_alerta/ui/widgets/my_appbar_widget.dart';
 import 'package:open_file/open_file.dart';
@@ -10,7 +11,11 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfPage extends StatelessWidget {
+
   savePdf() async {
+    ByteData byteData = await rootBundle.load('assets/images/man.png');
+    Uint8List imageBytes = byteData.buffer.asUint8List();
+
     pw.Document pdf = pw.Document();
     pdf.addPage(
       // pw.Page(
@@ -25,6 +30,9 @@ class PdfPage extends StatelessWidget {
           return [
             pw.Row(
               children: [
+                pw.Image(
+                  pw.MemoryImage(imageBytes),
+                ),
                 pw.Column(
                   children: [
                     pw.Text("Elemento: 1",),
