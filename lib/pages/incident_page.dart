@@ -70,7 +70,9 @@ class _IncidentPageState extends State<IncidentPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ExcelPage(),
+                  builder: (context) => ExcelPage(
+                    incidents: incidents,
+                  ),
                 ),
               );
             },
